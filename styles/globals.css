@@ -14,3 +14,18 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.calculator {
+  max-width: 16rem;
+  display: grid;
+}
+
+.screen {
+  background-color: lightgray;
+  min-height: 1.5rem;
+}
+
+.keyboard {
+  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+}
