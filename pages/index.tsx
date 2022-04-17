@@ -12,7 +12,7 @@ const precedences = new Map([
   [')',3]
 ]);
 
-const evaluateInput = (input: string): string => {
+const evaluateInput = (input: Array<string>): string => {
   const valueStack: Array<string> = [];
   const operatorStack: Array<string> = [];
 
@@ -24,7 +24,11 @@ const evaluateInput = (input: string): string => {
         const operator = operatorStack.pop();
         const oper1 = valueStack.pop();
         const oper2 = valueStack.pop();
-        const res = eval(`${oper1}${operator}${oper2}`)
+        let expression = `${oper1}${operator}${oper2}`;
+        if (operator === '/') {
+          expression = `${oper2}${operator}${oper1}`;
+        }
+        const res = eval(expression)
         valueStack.push(res);
       }
       operatorStack.pop();
@@ -33,7 +37,11 @@ const evaluateInput = (input: string): string => {
         const operator = operatorStack.pop();
         const oper1 = valueStack.pop();
         const oper2 = valueStack.pop();
-        const res = eval(`${oper1}${operator}${oper2}`)
+        let expression = `${oper1}${operator}${oper2}`;
+        if (operator === '/') {
+          expression = `${oper2}${operator}${oper1}`;
+        }
+        const res = eval(expression)
         valueStack.push(res);
       }
       operatorStack.push(token)
@@ -46,7 +54,11 @@ const evaluateInput = (input: string): string => {
     const operator = operatorStack.pop();
     const oper1 = valueStack.pop();
     const oper2 = valueStack.pop();
-    const res = eval(`${oper1}${operator}${oper2}`)
+    let expression = `${oper1}${operator}${oper2}`;
+    if (operator === '/') {
+      expression = `${oper2}${operator}${oper1}`;
+    }
+    const res = eval(expression)
     valueStack.push(res);
   }
   return valueStack.pop() || '';
