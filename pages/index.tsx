@@ -71,12 +71,13 @@ const Home: NextPage = () => {
       <div className='calculator'>
         <div className='screen'>{input}</div>
         <div className='keyboard'>
-          {[1,2,3,4,5,6,7,8,9,0].map(number => <button value={number} onClick={() => setInput(input + `${number}`)} key={number}>{number}</button>)}
+          {[1,2,3,4,5,6,7,8,9,0].map(number => <button value={number} onClick={() => setInput(`${input}${number}`)} key={number}>{number}</button>)}
           {operators.map((symbol,index) => <button onClick={() => {
-            setInput(input + `${symbol}`)
+            setInput(`${input} ${symbol} `)
           }} key={index}>{symbol}</button>)}
-          <button value={'='} onClick={() => setInput(evaluateInput(input))}>=</button>
-          {parentheses.map((paren, index) => <button onClick={() => setInput(input + `${paren}`)} key={index}>{paren}</button>)}
+          <button value={'='} onClick={() => setInput(evaluateInput(input.split(' ')))}>=</button>
+          {parentheses.map((paren, index) => <button onClick={() => setInput( paren === '(' ? `${input}${paren} ` : `${input} ${paren}` )} key={index}>{paren}</button>)}
+          <button value={'C'} onClick={() => setInput('')}>C</button>
         </div>
       </div>
     </main>
