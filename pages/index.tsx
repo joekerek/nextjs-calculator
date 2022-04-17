@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useState } from 'react'
+import { evaluate } from 'mathjs'
 
 const operators = ['+','-','*', '/'];
 const parentheses = ['(',')'];
@@ -28,7 +29,7 @@ const evaluateInput = (input: Array<string>): string => {
         if (operator === '/') {
           expression = `${oper2}${operator}${oper1}`;
         }
-        const res = eval(expression)
+        const res = evaluate(expression);
         valueStack.push(res);
       }
       operatorStack.pop();
@@ -41,7 +42,7 @@ const evaluateInput = (input: Array<string>): string => {
         if (operator === '/') {
           expression = `${oper2}${operator}${oper1}`;
         }
-        const res = eval(expression)
+        const res = evaluate(expression);
         valueStack.push(res);
       }
       operatorStack.push(token)
@@ -58,7 +59,7 @@ const evaluateInput = (input: Array<string>): string => {
     if (operator === '/') {
       expression = `${oper2}${operator}${oper1}`;
     }
-    const res = eval(expression)
+    const res = evaluate(expression);
     valueStack.push(res);
   }
   return valueStack.pop() || '';
